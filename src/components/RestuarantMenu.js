@@ -223,7 +223,7 @@ const MenuInfo = ({
 
   const dispatch = useDispatch();
   dispatch(clearCart());
-  dispatch(addRestuarantInfo({ name, areaName, cloudinaryImageId }));
+  dispatch(addRestuarantInfo({ name, areaName, cloudinaryImageId, id }));
 
   return (
     <>

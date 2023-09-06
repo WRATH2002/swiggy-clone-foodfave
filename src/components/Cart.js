@@ -263,29 +263,41 @@ const Cart = ({ cartQty }) => {
             <div className="cart_container">
               {/* <div className="cart_subcontainer"> */}
               <div className="cart_restuarant_info">
-                <div className="cart_restuaran_image">
-                  <img
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                    }}
-                    src={IMG_URL + cartRestuarantInfo[0].cloudinaryImageId}
-                  ></img>
-                </div>
+                <Link
+                  className="link"
+                  to={"/restuarant/" + cartRestuarantInfo[0].id}
+                >
+                  <div className="cart_restuaran_image">
+                    <img
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                      }}
+                      src={IMG_URL + cartRestuarantInfo[0].cloudinaryImageId}
+                    ></img>
+                  </div>
+                </Link>
+
                 <div className="cart_restuaran_name">
-                  <spna
-                    style={{
-                      fontSize: "16px",
-                      color: "black",
-                      letterSpacing: ".5px",
-                      overflow: "hidden",
-                      height: "22px",
-                      width: "250px",
-                    }}
+                  <Link
+                    className="link"
+                    to={"/restuarant/" + cartRestuarantInfo[0].id}
                   >
-                    <b>{cartRestuarantInfo[0].name}</b>
-                  </spna>
+                    <span
+                      style={{
+                        fontSize: "16px",
+                        color: "black",
+                        letterSpacing: ".5px",
+                        overflow: "hidden",
+                        height: "22px",
+                        width: "250px",
+                      }}
+                    >
+                      <b>{cartRestuarantInfo[0].name}</b>
+                    </span>
+                  </Link>
+
                   <span
                     style={{
                       fontSize: "11px",

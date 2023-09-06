@@ -13,6 +13,7 @@ import { addItemName, addIsVeg, addPrice, qty } from "../utils/cartSlice";
 import CartItemInfo from "./CartItemInfo";
 import { IMG_URL, EmptyCart } from "./config";
 import { Link } from "react-router-dom";
+import info_icon from "../assets/img/info.png";
 // import TotalToPay from "./TotalToPay";
 
 const Cart = ({ cartQty }) => {
@@ -37,6 +38,29 @@ const Cart = ({ cartQty }) => {
   const [on, setOn] = useState(true);
   const [address, setAddress] = useState("");
   const [active, setActive] = useState(false);
+
+  const [infoState, setInfoState] = useState(false);
+  const [feeState, setFeeState] = useState(false);
+
+  function feeToggle() {
+    if (feeState === false) {
+      setFeeState(true);
+      console.log(feeState);
+    } else {
+      setFeeState(false);
+      console.log(feeState);
+    }
+  }
+
+  function infoToggle() {
+    if (infoState === false) {
+      setInfoState(true);
+      console.log(infoState);
+    } else {
+      setInfoState(false);
+      console.log(infoState);
+    }
+  }
 
   function errorPayment() {
     const errorMessage = "Failed to Load Payment Methods!! Try Again Later";
@@ -255,6 +279,9 @@ const Cart = ({ cartQty }) => {
                       fontSize: "16px",
                       color: "black",
                       letterSpacing: ".5px",
+                      overflow: "hidden",
+                      height: "22px",
+                      width: "250px",
                     }}
                   >
                     <b>{cartRestuarantInfo[0].name}</b>
@@ -427,14 +454,70 @@ const Cart = ({ cartQty }) => {
                       </span>
                     </div>
                     <div className="s">
-                      <span>Platform fee</span>
+                      <div style={{ display: "flex", alignItems: "center" }}>
+                        <span>Platform fee</span>
+                        <img
+                          style={{
+                            width: "17px",
+                            paddingLeft: "5px",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => {
+                            feeToggle();
+                          }}
+                          src={info_icon}
+                        ></img>
+                      </div>
                       <span>
-                        <strike>&#8377; 30</strike>
+                        <strike>&#8377; 5</strike>
                         <b style={{ color: "#60b246" }}> FREE</b>
                       </span>
                     </div>
+                    {!feeState ? (
+                      <></>
+                    ) : (
+                      <div
+                        className="s"
+                        style={{
+                          marginTop: "8px",
+                          marginBottom: "8px",
+                          color: "#afafaf",
+                        }}
+                      >
+                        <div
+                          style={{
+                            // display: "flex",
+                            // flexDirection: "column",
+                            // alignItems: "flex-start",
+                            width: "182px",
+                            lineHeight: "13px",
+                            fontSize: "11px",
+                            textAlign: "justify",
+                          }}
+                        >
+                          <span>
+                            This fee helps us operate and improve our platform,
+                            delivery and seemless app experience
+                          </span>
+                        </div>
+                      </div>
+                    )}
+
                     <div className="s">
-                      <span>GST and Restaurant Charges</span>
+                      <div style={{ display: "flex", alignItems: "center" }}>
+                        <span>GST and Restaurant Charges</span>
+                        <img
+                          style={{
+                            width: "17px",
+                            paddingLeft: "5px",
+                            cursor: "pointer",
+                          }}
+                          onClick={() => {
+                            infoToggle();
+                          }}
+                          src={info_icon}
+                        ></img>
+                      </div>
                       <span>
                         &#8377;{" "}
                         {(
@@ -443,6 +526,52 @@ const Cart = ({ cartQty }) => {
                         ).toFixed(2)}
                       </span>
                     </div>
+                    {!infoState ? (
+                      <></>
+                    ) : (
+                      <div
+                        className="s"
+                        style={{ marginTop: "2px", color: "#afafaf" }}
+                      >
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "flex-start",
+                            width: "182px",
+                          }}
+                        >
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              fontSize: "11px",
+                              width: "100%",
+                            }}
+                          >
+                            <span>Restaurant Packaging</span>
+                            <span>
+                              <strike>&#8377; 7</strike>
+                              <span style={{ color: "rgb(96, 178, 70)" }}>
+                                {" "}
+                                FREE
+                              </span>
+                            </span>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              fontSize: "11px",
+                              width: "100%",
+                            }}
+                          >
+                            <span>Restaurant GST</span>
+                            <span>&#8377; {(cartItemTotal / 100) * 0.18}</span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

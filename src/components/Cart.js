@@ -280,23 +280,23 @@ const Cart = ({ cartQty }) => {
                 </Link>
 
                 <div className="cart_restuaran_name">
-                  <Link
-                    className="link"
-                    to={"/restuarant/" + cartRestuarantInfo[0].id}
+                  <span
+                    style={{
+                      fontSize: "16px",
+                      color: "black",
+                      letterSpacing: ".5px",
+                      overflow: "hidden",
+                      height: "22px",
+                      width: "250px",
+                    }}
                   >
-                    <span
-                      style={{
-                        fontSize: "16px",
-                        color: "black",
-                        letterSpacing: ".5px",
-                        overflow: "hidden",
-                        height: "22px",
-                        width: "250px",
-                      }}
+                    <Link
+                      className="link"
+                      to={"/restuarant/" + cartRestuarantInfo[0].id}
                     >
                       <b>{cartRestuarantInfo[0].name}</b>
-                    </span>
-                  </Link>
+                    </Link>
+                  </span>
 
                   <span
                     style={{
@@ -306,8 +306,14 @@ const Cart = ({ cartQty }) => {
                       letterSpacing: ".5px",
                     }}
                   >
-                    {cartRestuarantInfo[0].areaName}
+                    <Link
+                      className="link"
+                      to={"/restuarant/" + cartRestuarantInfo[0].id}
+                    >
+                      {cartRestuarantInfo[0].areaName}
+                    </Link>
                   </span>
+
                   <div className="underline"></div>
                 </div>
               </div>
@@ -579,7 +585,10 @@ const Cart = ({ cartQty }) => {
                             }}
                           >
                             <span>Restaurant GST</span>
-                            <span>&#8377; {(cartItemTotal / 100) * 0.18}</span>
+                            <span>
+                              &#8377;{" "}
+                              {((cartItemTotal / 100) * 0.18).toFixed(2)}
+                            </span>
                           </div>
                         </div>
                       </div>

@@ -56,6 +56,19 @@ const cartSlice = createSlice({
     clearCart: (state) => {
       state.restuarantInfo = [];
     },
+    uniqueItem: (state) => {
+      const uniqueItem = [];
+      const uniqueItemId = new Set();
+
+      state.itemName.forEach((item) => {
+        if (!uniqueItemId.has(item.id)) {
+          uniqueItemId.add(item.id);
+          uniqueItem.push(item);
+        }
+      });
+
+      state.itemName = uniqueItem;
+    },
   },
 });
 
@@ -69,6 +82,7 @@ export const {
   decQty,
   totalAmount,
   addRestuarantInfo,
+  uniqueItem,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

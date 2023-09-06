@@ -21,6 +21,7 @@ import {
   totalAmount,
   addRestuarantInfo,
   clearCart,
+  uniqueItem,
 } from "../utils/cartSlice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -51,12 +52,9 @@ const MenuList = ({ name, imageId, description, price, isVeg, id }) => {
   }
 
   const handleAddItem = () => {
-    console.log(qty);
     dispatch(addItemName({ name, isVeg, price, qty, id }));
-    // dispatch(totalAmount());
-    // dispatch(addrestuarantInfo({}));
-    // console.log(name);
-    // console.log(id);
+
+    console.log(id);
   };
   return (
     <>
@@ -87,68 +85,70 @@ const MenuList = ({ name, imageId, description, price, isVeg, id }) => {
               className="menu_add_to_cart"
               onClick={() => {
                 var quantity = qty;
-                quantity = quantity + 1;
-                setQty(quantity);
+                quantity += 1;
+                setQty(qty);
                 handleAddItem();
                 totalAmount();
                 toggleBtn();
                 console.log(qty);
+                console.log(cartItemInfo);
+                dispatch(uniqueItem());
               }}
             >
               <b>ADD</b>
             </div>
           ) : (
-            // <div id="add_qty" className="cart_add_button">
-            //   <div
-            //     className="btn decrease_qty"
-            //     onClick={() => {
-            //       console.log("clicked");
-            //       var quantity = cartQty;
-            //       if (quantity - 1 === 0) {
-            //         handleRemoveItem();
-            //         dispatch(totalAmount());
-            //       } else {
-            //         quantity = quantity - 1;
-            //         setCartQty(quantity);
-            //         console.log(cartQty);
-            //         dispatch(decQty(id));
-            //         dispatch(totalAmount());
-            //       }
-            //     }}
-            //   >
-            //     <div className="decrease"></div>
-            //   </div>
-            //   <button className="qty">{cartQty}</button>
-            //   <button
-            //     className="btn increase_qty"
-            //     onClick={() => {
-            //       console.log("clicked");
-            //       var quantity = cartQty;
-            //       quantity = quantity + 1;
-            //       setCartQty(quantity);
-            //       console.log(cartQty);
-            //       dispatch(incQty(id));
-            //       dispatch(totalAmount());
-            //     }}
-            //   >
-            //     +
-            //   </button>
-            // </div>
-            <div
-              id="add"
-              className="menu_add_to_cart"
-              style={{ backgroundColor: "#60b246", color: "white" }}
-              onClick={() => {
-                // var quantity = qty;
-                // quantity = quantity + 1;
-                // setQty(quantity);
-                // // handleAddItem();
-                // // toggleBtn();
-                // console.log(qty);
-              }}
-            >
-              <b>ADDED</b>
+            <div id="add_qty" className="cart_add_button">
+              <div
+                className="btn decrease_qty"
+                onClick={() => {
+                  console.log("clicked");
+                  var quantity = cartQty;
+                  if (quantity - 1 === 0) {
+                    handleRemoveItem();
+                    dispatch(totalAmount());
+                  } else {
+                    quantity = quantity - 1;
+                    setCartQty(quantity);
+                    console.log(cartQty);
+                    dispatch(decQty(id));
+                    dispatch(totalAmount());
+                  }
+                }}
+              >
+                <div className="decrease"></div>
+              </div>
+              <button className="qty">{cartQty}</button>
+              <button
+                className="btn increase_qty"
+                onClick={() => {
+                  console.log("clicked");
+                  var quantity = cartQty;
+                  quantity = quantity + 1;
+                  setCartQty(quantity);
+                  console.log(cartQty);
+                  dispatch(incQty(id));
+                  dispatch(totalAmount());
+                }}
+              >
+                +
+              </button>
             </div>
+            // <div
+            //   id="add"
+            //   className="menu_add_to_cart"
+            //   style={{ backgroundColor: "#60b246", color: "white" }}
+            //   onClick={() => {
+            //     // var quantity = qty;
+            //     // quantity = quantity + 1;
+            //     // setQty(quantity);
+            //     // // handleAddItem();
+            //     // // toggleBtn();
+            //     // console.log(qty);
+            //   }}
+            // >
+            //   <b>ADDED</b>
+            // </div>
           )}
 
           {/* <div id="add_qty" className="cart_add_button">
@@ -217,8 +217,10 @@ const MenuInfo = ({
     const json = await data.json();
     console.log(json);
     setRestuarantInfo(json?.data?.cards[0]?.card?.card?.info?.sla);
+
     setRestuarantCuisines(json?.data?.cards[0]?.card?.card?.info);
-    console.log(restuarantCuisines);
+    // console.log("resturannt info : " + restuarantInfo);
+    // console.log("resturannt cuisine : " + restuarantCuisines);
   }
 
   const dispatch = useDispatch();
@@ -297,6 +299,7 @@ function toggleImage() {
 const RestaurantMenu = () => {
   const [restuarantInfo, setRestuarantInfo] = useState([]);
   const [restuarantMenu, setRestuarantMenu] = useState([]);
+  const [altRestuarantMenu, setAltRestuarantMenu] = useState([]);
   const [menuCuisine, setMenuCuisine] = useState([]);
   const [menuTitle, setMenuTitle] = useState([]);
 
@@ -328,6 +331,10 @@ const RestaurantMenu = () => {
       json?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card
         ?.card?.itemCards
     );
+    setAltRestuarantMenu(
+      json?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
+        ?.card?.itemCards
+    );
     setRestuarantInfo(json?.data?.cards[0]?.card?.card);
 
     setMenuCuisine(json?.data?.cards[0]?.card?.card?.info);
@@ -335,8 +342,15 @@ const RestaurantMenu = () => {
     setMenuTitle(
       json?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards
     );
+
+    // if (restuarantMenu.length === 0) {
+    //   setRestuarantMenu(
+    //     json?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
+    //       ?.card?.itemCards
+    //   );
+    // }
   }
-  console.log(restuarantInfo);
+  // console.log("info : " + { restuarantInfo });
   // const restuarantName = restuarantInfo.info.name;
   // const restuarantAreaName = restuarantInfo.info.areaName;
   // const restuarantImage = restuarantInfo.info.cloudinaryImageId;
@@ -346,6 +360,7 @@ const RestaurantMenu = () => {
   // console.log(restuarantInfo.info.cloudinaryImageId);
 
   // console.log(menuTitle);
+
   return restuarantMenu?.length === 0 ? (
     <RestuarantMenuShimmer />
   ) : (
@@ -368,6 +383,20 @@ const RestaurantMenu = () => {
       <div className="recomended_menu">
         {/* <span>Recomended</span> */}
         <div className="menulist_container">
+          {/* {!restuarantMenu.length === 0 ? (
+{restuarantMenu.map((menulist, index) => {
+            return <MenuList key={index} {...menulist.card.info} />;
+            // const restuarantName = restuarantInfo.info.name;
+            // const restuarantAreaName = restuarantInfo.info.areaName;
+            // const restuarantImage = restuarantInfo.info.cloudinaryImageId;
+          })}) : (
+            {altRestuarantMenu.map((menulist, index) => {
+            return <MenuList key={index} {...menulist.card.info} />;
+            // const restuarantName = restuarantInfo.info.name;
+            // const restuarantAreaName = restuarantInfo.info.areaName;
+            // const restuarantImage = restuarantInfo.info.cloudinaryImageId;
+          })}
+          )} */}
           {restuarantMenu.map((menulist, index) => {
             return <MenuList key={index} {...menulist.card.info} />;
             // const restuarantName = restuarantInfo.info.name;

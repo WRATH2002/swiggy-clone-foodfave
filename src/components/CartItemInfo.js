@@ -1,28 +1,36 @@
 import non_veg_icon from "../assets/img/non_veg.png";
 import veg_icon from "../assets/img/veg.png";
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 // import Cart from "./Cart";
 import {
   addItemName,
+  totalAmount,
   addIsVeg,
   addPrice,
   removeItem,
   incQty,
   decQty,
   totalAmount,
+  addRestuarantInfo,
+  clearCart,
+  uniqueItem,
 } from "../utils/cartSlice";
 import { useDispatch } from "react-redux";
 // import TotalToPay from "./TotalToPay";
 
 const CartItemInfo = ({ name, price, isVeg, qty, id, updateSum }) => {
   const dispatch = useDispatch();
-
+  const cartItemInfo = useSelector((store) => store.cart.itemName);
   const [cartQty, setCartQty] = useState(1);
+
+  // setCartQty(cartItemInfo.qty);
+  // console.log(cartItemInfo.id);
   // const [itemId, setItemId] = useState(id);
   // setItemId(id);
   // console.log(itemId);
 
-  var price = price * cartQty;
+  var price = price * qty;
   dispatch(totalAmount());
   const handleRemoveItem = () => {
     dispatch(removeItem({ id }));
@@ -65,7 +73,7 @@ const CartItemInfo = ({ name, price, isVeg, qty, id, updateSum }) => {
             className=" cart_decrease_qty"
             onClick={() => {
               console.log("clicked");
-              var quantity = cartQty;
+              var quantity = qty;
               if (quantity - 1 === 0) {
                 handleRemoveItem();
                 dispatch(totalAmount());
@@ -80,7 +88,7 @@ const CartItemInfo = ({ name, price, isVeg, qty, id, updateSum }) => {
           >
             <div className="minus"></div>
           </div>
-          <div className="cart_item_qty">{cartQty}</div>
+          <div className="cart_item_qty">{qty}</div>
           <div
             className="cart_increase_qty "
             onClick={() => {

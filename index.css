@@ -1323,10 +1323,10 @@ span {
 }
 .cart_item_name {
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   width: 143px;
-  /* height: 31px; */
   max-height: 31px;
+  min-height: 15px;
   padding-left: 10px;
   padding-right: 6px;
   font-size: 12px;

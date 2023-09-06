@@ -21,6 +21,7 @@ const App = () => {
       <Provider store={store}>
         <Header />
         <Outlet />
+        <Footer />
       </Provider>
       {/* <Help />
       <Body /> */}

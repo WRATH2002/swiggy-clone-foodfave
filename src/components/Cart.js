@@ -380,6 +380,7 @@ const Cart = ({ cartQty }) => {
                         setContactLess(changeData);
                       }}
                       type="checkbox"
+                      className="checkbox"
                       style={{ width: "42px", height: "26px" }}
                     ></input>
                     <div style={{ display: "flex", flexDirection: "column" }}>

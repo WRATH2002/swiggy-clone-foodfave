@@ -642,9 +642,18 @@ span {
   border-top: 1px solid #d6d6d6;
   width: 770px;
 }
-
+.checkbox:active {
+  background-color: #fff;
+}
+/* input[type="checkbox"]:after {
+  accent-color: rgb(222, 30, 30);
+  mix-blend-mode: multiply;
+} */
 /* Custom Scrollbar */
-
+::-webkit-scrollbar {
+  height: 3px;
+  width: 4px;
+}
 .card_carousel::-webkit-scrollbar {
   height: 3px;
   width: 4px;
@@ -1457,4 +1466,15 @@ span {
   margin-top: 9px;
   font-size: 13px;
   color: #7e808c;
+}
+/* Footer */
+.footer {
+  font-family: Noto Sans Multani, sans-serif;
+  height: 33px;
+  display: flex;
+  background: black;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+  color: white;
 }

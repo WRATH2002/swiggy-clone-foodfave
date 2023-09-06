@@ -113,100 +113,105 @@ const SearchRestuarant = () => {
     <SearchRestuarantShimmer />
   ) : (
     <>
-      <div className="search_container">
-        <div className="search_subcontainer">
-          <input
-            type="text"
-            className="search_input"
-            placeholder="Search Food or Restuarant"
-            value={searchInputText}
-            onChange={(e) => {
-              setSearchInputText(e.target.value);
-              console.log(searchInputText);
-            }}
-          ></input>
-          <button
-            className="search_btn"
-            onClick={() => {
-              // setRecentSearches(searchInputText);
-              // console.log(recentSearches);
-              const filteredData = filterData(
-                searchInputText,
-                filteredRestuarants,
-                allRestuarants,
-                setRecentSearches,
-                recentSearches
-              );
-              setFilteredRestuarants(filteredData);
-            }}
-          >
-            <img className="search_icon_btn" src={search_icon}></img>
-          </button>
+      <div style={{ width: "100%", height: "calc(100vh - 100px)" }}>
+        <div className="search_container">
+          <div className="search_subcontainer">
+            <input
+              type="text"
+              className="search_input"
+              placeholder="Search Food or Restuarant"
+              value={searchInputText}
+              onChange={(e) => {
+                setSearchInputText(e.target.value);
+                console.log(searchInputText);
+              }}
+            ></input>
+            <button
+              className="search_btn"
+              onClick={() => {
+                // setRecentSearches(searchInputText);
+                // console.log(recentSearches);
+                const filteredData = filterData(
+                  searchInputText,
+                  filteredRestuarants,
+                  allRestuarants,
+                  setRecentSearches,
+                  recentSearches
+                );
+                setFilteredRestuarants(filteredData);
+              }}
+            >
+              <img className="search_icon_btn" src={search_icon}></img>
+            </button>
+          </div>
         </div>
-      </div>
 
-      {/* <div className="card_list_container">
+        {/* <div className="card_list_container">
         <div className="card_list_subcontainer">
           <div className="card_container"> */}
-      <div
-        className="popular_cuisines_container"
-        style={{ marginBottom: "60px" }}
-      >
-        {filteredRestuarants?.length === 0 ? (
-          <>
-            <span
-              className="popular_cuisines_heading"
-              style={{ fontSize: "20px" }}
-            >
-              <b>Recent Searches</b>
-            </span>
-            <div className="recent_search_history">
-              <RecentSearchHistory />
-              {recentSearches.map((history, index) => {
-                return (
-                  <>
-                    <div className="popular_cuisines_container">
-                      <div className="search_history_separate"> </div>
-                    </div>
-                    <div style={{ display: "flex", alignItems: "center" }}>
-                      <img className="search_icon_btn" src={search_icon}></img>
-                      <span style={{ marginLeft: "15px" }} key={index}>
-                        {history}
-                      </span>
-                    </div>
-                  </>
-                );
-              })}
-            </div>
-          </>
-        ) : (
-          filteredRestuarants.map((restuarant, index) => {
-            return (
-              // <Link className="link" to={"/restuarant/" + restuarant.info.id}>
-              <RestaurantCard key={index} {...restuarant.info} />
-              // </Link>
-            );
-          })
-        )}
-      </div>
-      {/* </div>
+        <div
+          className="popular_cuisines_container"
+          style={{ marginBottom: "60px" }}
+        >
+          {filteredRestuarants?.length === 0 ? (
+            <>
+              <span
+                className="popular_cuisines_heading"
+                style={{ fontSize: "20px" }}
+              >
+                <b>Recent Searches</b>
+              </span>
+              <div className="recent_search_history">
+                <RecentSearchHistory />
+                {recentSearches.map((history, index) => {
+                  return (
+                    <>
+                      <div className="popular_cuisines_container">
+                        <div className="search_history_separate"> </div>
+                      </div>
+                      <div style={{ display: "flex", alignItems: "center" }}>
+                        <img
+                          className="search_icon_btn"
+                          src={search_icon}
+                        ></img>
+                        <span style={{ marginLeft: "15px" }} key={index}>
+                          {history}
+                        </span>
+                      </div>
+                    </>
+                  );
+                })}
+              </div>
+            </>
+          ) : (
+            filteredRestuarants.map((restuarant, index) => {
+              return (
+                // <Link className="link" to={"/restuarant/" + restuarant.info.id}>
+                <RestaurantCard key={index} {...restuarant.info} />
+                // </Link>
+              );
+            })
+          )}
+        </div>
+        {/* </div>
         </div>
       </div> */}
 
-      <div className="popular_cuisines_container">
-        <span className="popular_cuisines_heading">
-          <b>Popular Cuisines</b>
-        </span>
-        <div className="popular_cuisines_image_container">
-          {popularCuisines.map(({ imageId, index }) => {
-            return (
-              <img
-                className="popular_cuisines_image"
-                key={index}
-                src={IMG_URL + imageId}
-              ></img>
-            );
-          })}
+        <div className="popular_cuisines_container">
+          <span className="popular_cuisines_heading">
+            <b>Popular Cuisines</b>
+          </span>
+          <div className="popular_cuisines_image_container">
+            {popularCuisines.map(({ imageId, index }) => {
+              return (
+                <img
+                  className="popular_cuisines_image"
+                  key={index}
+                  src={IMG_URL + imageId}
+                ></img>
+              );
+            })}
+          </div>
         </div>
       </div>
     </>

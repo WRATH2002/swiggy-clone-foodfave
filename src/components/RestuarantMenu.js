@@ -320,7 +320,9 @@ const MenuInfo = ({
   //   dispatch(addRestuarantInfo({ name, areaName, cloudinaryImageId, id }));
   //   console.log(areaName);
   // }
-
+  if (resInfo[0]?.id === id) {
+    dispatch(decFlag());
+  }
   console.log("res info : ");
   console.log(resInfo);
   console.log("Item Info : ");

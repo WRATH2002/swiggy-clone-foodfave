@@ -6,6 +6,7 @@ import star_icon from "../assets/img/star.png";
 import { Link } from "react-router-dom";
 import left_arrow_icon from "../assets/img/left-arrow.png";
 import right_arrow_icon from "../assets/img/right-arrow.png";
+import filter_icon from "../assets/img/filter.png";
 import {
   useTopRestuarant,
   useFilteredRestuarants,
@@ -70,7 +71,7 @@ export const RestaurantCard = ({
 const SortConfigs = ({ title }) => {
   return (
     <>
-      <h1>{title}</h1>
+      <span className="sort">{title}</span>
     </>
   );
 };
@@ -138,7 +139,81 @@ const RestaurantCardList = () => {
   console.log(filteredRestuarants);
   if (!allRestuarants) return <h1>Failed to Fetch Retaurants</h1>;
 
-  return allRestuarants?.length === 0 ? (
+  function filterRating() {
+    const update = filteredRestuarants.sort(
+      (a, b) => b.info.avgRating - a.info.avgRating
+    );
+    setFilteredRestuarants(update);
+    const falseUpdate = filteredRestuarants.filter(
+      (item) => item.info.avgRating > 0
+    );
+    setFilteredRestuarants(falseUpdate);
+  }
+
+  function filterDeliveryTime() {
+    const update = filteredRestuarants.sort(
+      (a, b) => b.info.sla.deliveryTime - a.info.sla.deliveryTime
+    );
+    setFilteredRestuarants(update);
+    const falseUpdate = filteredRestuarants.filter(
+      (item) => item.info.avgRating > 0
+    );
+    setFilteredRestuarants(falseUpdate);
+  }
+
+  function filterCostHtL() {
+    const update = filteredRestuarants.sort(
+      (a, b) => b.info.feeDetails.totalFee - a.info.feeDetails.totalFee
+    );
+    setFilteredRestuarants(update);
+    const falseUpdate = filteredRestuarants.filter(
+      (item) => item.info.avgRating > 0
+    );
+    setFilteredRestuarants(falseUpdate);
+  }
+
+  function filterCostLtH() {
+    const update = filteredRestuarants.sort(
+      (a, b) => a.info.feeDetails.totalFee - b.info.feeDetails.totalFee
+    );
+    setFilteredRestuarants(update);
+    const falseUpdate = filteredRestuarants.filter(
+      (item) => item.info.avgRating > 0
+    );
+    setFilteredRestuarants(falseUpdate);
+  }
+
+  function filterRelevance() {
+    setFilteredRestuarants(allRestuarants);
+    const falseUpdate = allRestuarants.filter(
+      (item) => item.info.avgRating > 0
+    );
+    setFilteredRestuarants(falseUpdate);
+  }
+
+  function filterVeg() {
+    const update = filteredRestuarants.sort(
+      (a, b) => a.info.feeDetails.totalFee - b.info.feeDetails.totalFee
+    );
+    setFilteredRestuarants(update);
+    const falseUpdate = filteredRestuarants.filter(
+      (item) => item.info.avgRating > 0
+    );
+    setFilteredRestuarants(falseUpdate);
+  }
+
+  function filterNonVeg() {
+    const update = filteredRestuarants.sort(
+      (a, b) => a.info.feeDetails.totalFee - b.info.feeDetails.totalFee
+    );
+    setFilteredRestuarants(update);
+    const falseUpdate = filteredRestuarants.filter(
+      (item) => item.info.avgRating > 0
+    );
+    setFilteredRestuarants(falseUpdate);
+  }
+
+  return filteredRestuarants?.length === 0 ? (
     <ShimmerUI />
   ) : (
     <>
@@ -201,9 +276,31 @@ const RestaurantCardList = () => {
       </div>
       <br></br>
       <div className="card_container">
-        {sortConfig.map((config, index) => {
+        <span className="sort">
+          Filter{" "}
+          <img
+            style={{ margin: "0px 5px", width: "13px" }}
+            src={filter_icon}
+          ></img>
+        </span>
+        {/* {sortConfig.map((config, index) => {
           return <SortConfigs key={index} {...config} />;
-        })}
+        })} */}
+        <span className="sort" onClick={() => filterRelevance()}>
+          Relevance
+        </span>
+        <span className="sort" onClick={() => filterDeliveryTime()}>
+          Delivery Time
+        </span>
+        <span className="sort" onClick={() => filterRating()}>
+          Rating
+        </span>
+        <span className="sort" onClick={() => filterCostLtH()}>
+          Cost: Low to High
+        </span>
+        <span className="sort" onClick={() => filterCostHtL()}>
+          Cost: High to Low
+        </span>
       </div>
       <br></br>
       <div className="card_list_container">

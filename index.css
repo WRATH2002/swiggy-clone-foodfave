@@ -1490,6 +1490,7 @@ span {
   flex-direction: column;
   text-align: justify;
   box-shadow: 0 4px 14px #d4d5d9;
+  margin-bottom: 30px;
 }
 .alertbtn > button {
   width: 170px;
@@ -1508,4 +1509,15 @@ span {
   justify-content: space-between;
   align-items: center;
   margin-top: 17px;
+}
+.alert_container {
+  width: 100%;
+  height: calc(100vh - 80px);
+  position: fixed;
+  margin-top: -60px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  /* margin-bottom: 20px; */
+  /* bottom: 0px; */
 }

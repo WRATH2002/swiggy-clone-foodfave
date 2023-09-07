@@ -332,18 +332,19 @@ const MenuInfo = ({
         <></>
       ) : (
         <div
-          style={{
-            width: "100%",
-            height: "200px",
-            position: "fixed",
-            // backgroundColor: "#80808026",
-            marginTop: "-140px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            marginBottom: "20px",
-            bottom: "0",
-          }}
+          className="alert_container"
+          // style={{
+          //   width: "100%",
+          //   height: "200px",
+          //   position: "fixed",
+          //   // backgroundColor: "#80808026",
+          //   marginTop: "-140px",
+          //   display: "flex",
+          //   justifyContent: "center",
+          //   alignItems: "center",
+          //   marginBottom: "20px",
+          //   bottom: "0",
+          // }}
         >
           <div style={{}} className="alertcontainer">
             <span style={{ fontSize: "15px" }}>

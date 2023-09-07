@@ -22,13 +22,25 @@ import {
   addRestuarantInfo,
   clearCart,
   uniqueItem,
+  clearItemName,
+  incFlag,
+  decFlag,
 } from "../utils/cartSlice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { addItemName, addIsVeg, addPrice, qty } from "../utils/cartSlice";
 import CartItemInfo from "./CartItemInfo";
+import { useSelector } from "react-redux";
 
-const MenuList = ({ name, imageId, description, price, isVeg, id }) => {
+const MenuList = ({
+  name,
+  imageId,
+  description,
+  price,
+  defaultPrice,
+  isVeg,
+  id,
+}) => {
   // const restuarantName = name;
   // const restuarantAreaName = areaName;
   // const restuarantImage = cloudinaryImageId;
@@ -38,6 +50,7 @@ const MenuList = ({ name, imageId, description, price, isVeg, id }) => {
   // console.log(restuarantInfo.info.cloudinaryImageId);
   const cartItemInfo = useSelector((store) => store.cart.itemName);
   const cartItemTotal = useSelector((store) => store.cart.price);
+  const flag = useSelector((store) => store.cart.flag);
   console.log(cartItemTotal);
 
   const dispatch = useDispatch();
@@ -56,6 +69,10 @@ const MenuList = ({ name, imageId, description, price, isVeg, id }) => {
 
     console.log(id);
   };
+  const handleRemoveItem = () => {
+    dispatch(removeItem({ id }));
+    // console.log(itemId);
+  };
   return (
     <>
       <div className="menu_container">
@@ -70,10 +87,23 @@ const MenuList = ({ name, imageId, description, price, isVeg, id }) => {
           <p className="menu_name">
             <b>{name}</b>
           </p>
-          <p className="menu_price">
+
+          {price === undefined ? (
+            <p className="menu_price">
+              <span>&#x20b9;</span>
+              {defaultPrice / 100}
+            </p>
+          ) : (
+            <p className="menu_price">
+              <span>&#x20b9;</span>
+              {price / 100}
+            </p>
+          )}
+
+          {/* <p className="menu_price">
             <span>&#x20b9;</span>
-            {price / 100}
-          </p>
+            {price === null ? defaultPrice / 100 : price / 100}
+          </p> */}
           <p className="menu_description">{description}</p>
         </div>
         <div className="menu_add">
@@ -84,15 +114,22 @@ const MenuList = ({ name, imageId, description, price, isVeg, id }) => {
               id="add"
               className="menu_add_to_cart"
               onClick={() => {
-                var quantity = qty;
-                quantity += 1;
-                setQty(qty);
-                handleAddItem();
-                totalAmount();
-                toggleBtn();
-                console.log(qty);
-                console.log(cartItemInfo);
-                dispatch(uniqueItem());
+                if (price === undefined) {
+                  price = defaultPrice;
+                }
+                if (flag[0] === 1) {
+                  dispatch(decFlag());
+                } else {
+                  var quantity = qty;
+                  quantity += 1;
+                  setQty(qty);
+                  handleAddItem();
+                  totalAmount();
+                  toggleBtn();
+                  console.log(qty);
+                  console.log(cartItemInfo);
+                  dispatch(uniqueItem());
+                }
               }}
             >
               <b>ADD</b>
@@ -107,6 +144,7 @@ const MenuList = ({ name, imageId, description, price, isVeg, id }) => {
                   if (quantity - 1 === 0) {
                     handleRemoveItem();
                     dispatch(totalAmount());
+                    toggleBtn();
                   } else {
                     quantity = quantity - 1;
                     setCartQty(quantity);
@@ -201,12 +239,23 @@ const MenuInfo = ({
 }) => {
   const [restuarantInfo, setRestuarantInfo] = useState([]);
   const [restuarantCuisines, setRestuarantCuisines] = useState([]);
+  const [idcheck, setIdcheck] = useState(0);
   const params = useParams();
   const { id } = params;
+  const dispatch = useDispatch();
+  // dispatch(addRestuarantInfo({ name, areaName, cloudinaryImageId, id }));
+
+  const resInfo = useSelector((store) => store.cart.restuarantInfo);
+  const itemInfo = useSelector((store) => store.cart.itemName);
+  const flag = useSelector((store) => store.cart.flag);
 
   useEffect(() => {
     getrestuarantInfo();
-  }, []);
+    if (itemInfo.length === 0) {
+      dispatch(clearCart());
+      dispatch(addRestuarantInfo({ name, areaName, cloudinaryImageId, id }));
+    }
+  }, [1]);
 
   async function getrestuarantInfo() {
     const data = await fetch(
@@ -223,12 +272,113 @@ const MenuInfo = ({
     // console.log("resturannt cuisine : " + restuarantCuisines);
   }
 
-  const dispatch = useDispatch();
-  dispatch(clearCart());
-  dispatch(addRestuarantInfo({ name, areaName, cloudinaryImageId, id }));
+  // const dispatch = useDispatch();
+  // // dispatch(addRestuarantInfo({ name, areaName, cloudinaryImageId, id }));
+
+  // const resInfo = useSelector((store) => store.cart.restuarantInfo);
+  // const itemInfo = useSelector((store) => store.cart.itemName);
+  // if (itemInfo === undefined) {
+  //   dispatch(clearCart());
+  //   dispatch(addRestuarantInfo({ name, areaName, cloudinaryImageId, id }));
+  // }
+  // else if (itemInfo !== undefined){
+
+  // }
+  // if (resInfo.length === 0 || itemInfo === undefined) {
+  //   dispatch(clearCart());
+  //   dispatch(addRestuarantInfo({ name, areaName, cloudinaryImageId, id }));
+  // }
+
+  // if (resInfo.length === 0 ) {
+  //   dispatch(clearCart());
+  //   dispatch(addRestuarantInfo({ name, areaName, cloudinaryImageId, id }));
+  //   if (itemInfo.length === 0) {
+  //     dispatch(addRestuarantInfo({ name, areaName, cloudinaryImageId, id }));
+  //   }
+  //   // dispatch(clearCart());
+  //   // dispatch(addRestuarantInfo({ name, areaName, cloudinaryImageId, id }));
+  // }
+
+  // if (itemInfo.length === 0) {
+  //   dispatch(clearCart());
+  //   dispatch(addRestuarantInfo({ name, areaName, cloudinaryImageId, id }));
+  //   if (resInfo.length === 0) {
+  //     dispatch(clearCart());
+  //     dispatch(addRestuarantInfo({ name, areaName, cloudinaryImageId, id }));
+  //   }
+
+  // if (itemInfo.length === 0) {
+  //   dispatch(clearCart());
+  //   dispatch(addRestuarantInfo({ name, areaName, cloudinaryImageId, id }));
+  // }
+  // dispatch(clearCart());
+  // dispatch(addRestuarantInfo({ name, areaName, cloudinaryImageId, id }));
+  // }
+  // dispatch(addRestuarantInfo({ name, areaName, cloudinaryImageId, id }));
+  // if (itemInfo.length === 0 && resInfo.length !== 0) {
+  //   dispatch(clearCart());
+  //   dispatch(addRestuarantInfo({ name, areaName, cloudinaryImageId, id }));
+  //   console.log(areaName);
+  // }
+
+  console.log("res info : ");
+  console.log(resInfo);
+  console.log("Item Info : ");
+  console.log(itemInfo);
 
   return (
     <>
+      {resInfo[0]?.id === id || itemInfo.length === 0 || flag[0] === 1 ? (
+        <></>
+      ) : (
+        <div
+          style={{
+            width: "100%",
+            height: "200px",
+            position: "fixed",
+            // backgroundColor: "#80808026",
+            marginTop: "-140px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            marginBottom: "20px",
+            bottom: "0",
+          }}
+        >
+          <div style={{}} className="alertcontainer">
+            <span style={{ fontSize: "15px" }}>
+              <b>Items already in cart</b>
+            </span>
+            <span style={{ marginTop: "4px", fontSize: "13px" }}>
+              Your cart contains items from other restaurant. Would you like to
+              reset your cart for adding items from this restaurant?
+            </span>
+            <div className="alertbtn">
+              <button
+                style={{ color: "#60b246", backgroundColor: "white" }}
+                onClick={() => {
+                  dispatch(incFlag());
+                }}
+              >
+                NO
+              </button>
+              <button
+                style={{ color: "white", backgroundColor: "#60b246" }}
+                onClick={() => {
+                  dispatch(clearCart());
+                  dispatch(clearItemName());
+                  dispatch(
+                    addRestuarantInfo({ name, areaName, cloudinaryImageId, id })
+                  );
+                }}
+              >
+                YES, START AFRESH
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="menu_restuarant_info_container">
         <div className="menu_restuarant_info">
           <span className="menu_restuarant_name">
@@ -270,6 +420,7 @@ const MenuInfo = ({
           </span>
         </div>
       </div>
+
       {/* <h1>{sla.deliveryTime}</h1> */}
       {/* <RestuarantDeliveryTime {...restuarantInfo} />
       <h1>{costForTwoMessage}</h1> */}
@@ -397,12 +548,37 @@ const RestaurantMenu = () => {
             // const restuarantImage = restuarantInfo.info.cloudinaryImageId;
           })}
           )} */}
-          {restuarantMenu.map((menulist, index) => {
+          {/* altRestuarantMenu */}
+          {restuarantMenu === undefined ? (
+            altRestuarantMenu === undefined ? (
+              <div
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "calc(100vh - 80px)",
+                  color: "red",
+                }}
+              >
+                <span>Failed to load Menu for this Restuarant</span>
+              </div>
+            ) : (
+              altRestuarantMenu?.map((menulist, index) => {
+                return <MenuList key={index} {...menulist.card.info} />;
+              })
+            )
+          ) : (
+            restuarantMenu.map((menulist, index) => {
+              return <MenuList key={index} {...menulist.card.info} />;
+            })
+          )}
+          {/* {restuarantMenu.map((menulist, index) => {
             return <MenuList key={index} {...menulist.card.info} />;
             // const restuarantName = restuarantInfo.info.name;
             // const restuarantAreaName = restuarantInfo.info.areaName;
             // const restuarantImage = restuarantInfo.info.cloudinaryImageId;
-          })}
+          })} */}
         </div>
         <div className="">
           {menuTitle.map((menutitle, index) => {

@@ -265,7 +265,7 @@ const Cart = ({ cartQty }) => {
               <div className="cart_restuarant_info">
                 <Link
                   className="link"
-                  to={"/restuarant/" + cartRestuarantInfo[0].id}
+                  to={"/restuarant/" + cartRestuarantInfo[0]?.id}
                 >
                   <div className="cart_restuaran_image">
                     <img
@@ -274,7 +274,7 @@ const Cart = ({ cartQty }) => {
                         height: "100%",
                         objectFit: "cover",
                       }}
-                      src={IMG_URL + cartRestuarantInfo[0].cloudinaryImageId}
+                      src={IMG_URL + cartRestuarantInfo[0]?.cloudinaryImageId}
                     ></img>
                   </div>
                 </Link>
@@ -292,9 +292,9 @@ const Cart = ({ cartQty }) => {
                   >
                     <Link
                       className="link"
-                      to={"/restuarant/" + cartRestuarantInfo[0].id}
+                      to={"/restuarant/" + cartRestuarantInfo[0]?.id}
                     >
-                      <b>{cartRestuarantInfo[0].name}</b>
+                      <b>{cartRestuarantInfo[0]?.name}</b>
                     </Link>
                   </span>
 
@@ -308,9 +308,9 @@ const Cart = ({ cartQty }) => {
                   >
                     <Link
                       className="link"
-                      to={"/restuarant/" + cartRestuarantInfo[0].id}
+                      to={"/restuarant/" + cartRestuarantInfo[0]?.id}
                     >
-                      {cartRestuarantInfo[0].areaName}
+                      {cartRestuarantInfo[0]?.areaName}
                     </Link>
                   </span>
 

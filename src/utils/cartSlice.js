@@ -7,6 +7,7 @@ const cartSlice = createSlice({
     isVeg: [],
     price: [],
     id: [],
+    flag: [0],
     restuarantInfo: [],
   },
   reducers: {
@@ -55,6 +56,16 @@ const cartSlice = createSlice({
     },
     clearCart: (state) => {
       state.restuarantInfo = [];
+      // state.itemName = [];
+    },
+    clearItemName: (state) => {
+      state.itemName = [];
+    },
+    incFlag: (state) => {
+      state.flag[0] = 1;
+    },
+    decFlag: (state) => {
+      state.flag[0] = 0;
     },
     uniqueItem: (state) => {
       const uniqueItem = [];
@@ -73,6 +84,8 @@ const cartSlice = createSlice({
 });
 
 export const {
+  incFlag,
+  decFlag,
   addItemName,
   addIsVeg,
   addPrice,
@@ -83,6 +96,7 @@ export const {
   totalAmount,
   addRestuarantInfo,
   uniqueItem,
+  clearItemName,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

@@ -1478,3 +1478,34 @@ span {
   font-size: 13px;
   color: white;
 }
+/*  */
+
+.alertcontainer {
+  width: 400px;
+  padding: 20px;
+  /* background-color: aquamarine; */
+  background-color: #fff;
+  font-family: Noto Sans Multani, sans-serif;
+  display: flex;
+  flex-direction: column;
+  text-align: justify;
+  box-shadow: 0 4px 14px #d4d5d9;
+}
+.alertbtn > button {
+  width: 170px;
+  height: 40px;
+  outline: none;
+  border: 1px solid #60b246;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.alertbtn > button:hover {
+  box-shadow: 0 4px 14px #d4d5d9;
+}
+.alertbtn {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 17px;
+}

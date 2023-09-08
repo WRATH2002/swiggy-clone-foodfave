@@ -407,7 +407,7 @@ span {
   /* background-color: #37718e; */
   flex-direction: column;
   justify-content: space-between;
-  width: 385px;
+  width: 570px;
   height: 65px;
   display: flex;
   padding: 20px 0px;
@@ -417,7 +417,7 @@ span {
   /* background-color: #37718e; */
   flex-direction: column;
   justify-content: space-between;
-  width: 385px;
+  width: 200px;
   height: 65px;
   display: flex;
   padding: 20px 0px;
@@ -1600,4 +1600,53 @@ span {
   background: antiquewhite;
   position: fixed;
   margin-top: -284px;
+}
+
+/* login */
+.cross_login {
+  width: 32px;
+  margin-left: -8px;
+  margin-top: -8px;
+  cursor: pointer;
+}
+.login {
+  font-family: Noto Sans Multani, sans-serif;
+  font-size: 27px;
+  margin-top: 10px;
+}
+.switch_login {
+  font-family: Noto Sans Multani, sans-serif;
+  font-size: 13px;
+  margin-top: 10px;
+}
+.underline_login {
+  width: 30px;
+  margin-top: 20px;
+  border: 1px solid black;
+}
+.phonenumber_login {
+  outline: none;
+  border: 1px solid #d4d5d9;
+  width: calc(100% - 25px);
+  padding-left: 25px;
+  height: 65px;
+  margin-top: 40px;
+  font-size: 15px;
+}
+.placeholder_login {
+  font-family: Noto Sans Multani, sans-serif;
+}
+.btn_login {
+  font-family: Noto Sans Multani, sans-serif;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #fc8019;
+  background-color: #fc8019;
+  color: white;
+  font-size: 14px;
+  margin-top: 20px;
+  cursor: pointer;
 }

@@ -11,7 +11,16 @@ const Logo = () => {
         {/* <h1 className="logo"> */}
         <img className="logo_image" alt="logo" src={food_icon}></img>
         {/* <h1>FOODFAVES</h1> */}
-        <span style={{ display: "flex", alignItems: "center" }}>
+        <span
+          style={{
+            display: "flex",
+            alignItems: "center",
+            width: "80%",
+            height: "20px",
+            justifyContent: "flex-start",
+            overflow: "hidden",
+          }}
+        >
           Bapuji Nagar, Jadavpur, Kolkata, West...{" "}
           <img
             style={{ width: "20px", marginLeft: "6px" }}

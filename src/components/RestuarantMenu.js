@@ -287,7 +287,7 @@ const MenuInfo = ({
 
   async function getrestuarantInfo() {
     const data = await fetch(
-      "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=22.4875917&lng=88.3711233&restaurantId=" +
+      "https://cors-anywhere.herokuapp.com/https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=22.4875917&lng=88.3711233&restaurantId=" +
         id +
         "&catalog_qa=undefined&submitAction=ENTER"
     );
@@ -503,7 +503,7 @@ const RestaurantMenu = () => {
 
   async function getrestuarantInfo() {
     const data = await fetch(
-      "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=22.4875917&lng=88.3711233&restaurantId=" +
+      "https://cors-anywhere.herokuapp.com/https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=22.4875917&lng=88.3711233&restaurantId=" +
         id +
         "&catalog_qa=undefined&submitAction=ENTER"
     );

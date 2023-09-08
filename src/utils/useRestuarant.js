@@ -30,7 +30,7 @@ export const useFilteredRestuarants = () => {
 
   async function getrestuarants() {
     const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.4875917&lng=88.3711233&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      "https://cors-anywhere.herokuapp.com/https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.4875917&lng=88.3711233&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
     console.log(json);

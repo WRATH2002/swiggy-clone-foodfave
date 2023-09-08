@@ -10,6 +10,7 @@ import heart_icon from "../assets/img/heart.png";
 import heart_pink_icon from "../assets/img/heart_2.png";
 import search_icon from "../assets/img/search.png";
 import RestuarantMenuShimmer from "./RetuarantMenuShimmer";
+import no_photo_icon from "../assets/img/no-photo.png";
 import {
   addItemName,
   totalAmount,
@@ -75,6 +76,29 @@ const MenuList = ({
   };
   return (
     <>
+      {/* <div className="photo_container">
+        <div style={{}}>
+          {isVeg === 1 ? (
+            <img className="is_veg_image" src={veg_icon}></img>
+          ) : (
+            <img className="is_veg_image" src={non_veg_icon}></img>
+          )}
+          <span>{isVeg}</span>
+          <span>{name}</span>
+          {price === undefined ? (
+            <p className="menu_price">
+              <span>&#x20b9;</span>
+              {defaultPrice / 100}
+            </p>
+          ) : (
+            <p className="menu_price">
+              <span>&#x20b9;</span>
+              {price / 100}
+            </p>
+          )}
+          <span>{description}</span>
+        </div>
+      </div> */}
       <div className="menu_container">
         <div className="menu_info">
           <p>
@@ -107,7 +131,11 @@ const MenuList = ({
           <p className="menu_description">{description}</p>
         </div>
         <div className="menu_add">
-          <img className="menu_image" src={IMG_URL + imageId}></img>
+          {imageId === undefined ? (
+            <img className="menu_alt_image" src={no_photo_icon}></img>
+          ) : (
+            <img className="menu_image" src={IMG_URL + imageId}></img>
+          )}
 
           {!toggleAddBtn ? (
             <div

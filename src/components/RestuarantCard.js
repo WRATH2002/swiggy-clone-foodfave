@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import left_arrow_icon from "../assets/img/left-arrow.png";
 import right_arrow_icon from "../assets/img/right-arrow.png";
 import filter_icon from "../assets/img/filter.png";
+import RestaurantCardShimmer from "./RestuarantCardShimmer";
 import {
   useTopRestuarant,
   useFilteredRestuarants,
@@ -96,12 +97,29 @@ const SortConfigs = ({ title }) => {
 //   };
 // }
 
-function scrollLeft() {
+function scrollLeft1() {
+  document.getElementById("img_carousel").scrollLeft -= 820;
+}
+function scrollRight1() {
+  document.getElementById("img_carousel").scrollLeft += 816;
+}
+function scrollLeft2() {
   document.getElementById("card_carousel").scrollLeft -= 820;
 }
-function scrollRight() {
+function scrollRight2() {
   document.getElementById("card_carousel").scrollLeft += 816;
 }
+
+const ImgCarousel = ({ imageId }) => {
+  return (
+    <>
+      <img
+        style={{ margin: "9px 17px", width: "420px" }}
+        src={IMG_URL + imageId}
+      ></img>
+    </>
+  );
+};
 
 const RestaurantCardList = () => {
   // const topRestuarants = useTopRestuarant();
@@ -113,6 +131,7 @@ const RestaurantCardList = () => {
   const [filteredRestuarants, setFilteredRestuarants] = useState([]);
   const [allRestuarants, setAllRestuarants] = useState([]);
   const [sortConfig, setSortConfig] = useState([]);
+  const [imgCarousel, setImgCarousel] = useState([]);
 
   useEffect(() => {
     getrestuarants();
@@ -125,6 +144,7 @@ const RestaurantCardList = () => {
     );
     const json = await data.json();
     console.log(json);
+    setImgCarousel(json?.data?.cards[0]?.card?.card?.imageGridCards?.info);
     setFilteredRestuarants(
       json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
@@ -137,6 +157,8 @@ const RestaurantCardList = () => {
     setSortConfig(json?.data?.cards[4]?.card?.card?.sortConfigs);
   }
   console.log(filteredRestuarants);
+  console.log(topRestuarants);
+  console.log(imgCarousel);
   if (!allRestuarants) return <h1>Failed to Fetch Retaurants</h1>;
 
   function filterRating() {
@@ -214,7 +236,7 @@ const RestaurantCardList = () => {
   }
 
   return filteredRestuarants?.length === 0 ? (
-    <ShimmerUI />
+    <RestaurantCardShimmer />
   ) : (
     <>
       {/* <input
@@ -247,13 +269,53 @@ const RestaurantCardList = () => {
               <b>Top restaurant chains in Kolkata</b>
             </span>
             <div style={{ display: "flex" }}>
-              <button id="slideLeft" className="" onClick={() => scrollLeft()}>
+              <button
+                id="slideLeft"
+                className="slide"
+                onClick={() => scrollLeft1()}
+              >
                 <img className="left_arrow" src={left_arrow_icon}></img>
               </button>
               <button
                 id="slideRight"
                 className="right_arrow"
-                onClick={() => scrollRight()}
+                onClick={() => scrollRight1()}
+              >
+                <img className="right_arrow" src={right_arrow_icon}></img>
+              </button>
+            </div>
+          </div>
+          <div id="img_carousel" className="card_carousel">
+            {imgCarousel.map((restuarant, index) => {
+              return (
+                <Link
+                  className="link"
+                  to={"/restuarant/" + restuarant.entityId}
+                >
+                  <ImgCarousel key={index} {...restuarant} />
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="card_list_subcontainer">
+          <div className="scroll_btn">
+            <span style={{ fontSize: "20px", marginLeft: "16px" }}>
+              <b>Top restaurant chains in Kolkata</b>
+            </span>
+            <div style={{ display: "flex" }}>
+              <button
+                id="slideLeft2"
+                className=" slideL"
+                onClick={() => scrollLeft2()}
+              >
+                <img className="left_arrow " src={left_arrow_icon}></img>
+              </button>
+              <button
+                id="slideRight"
+                className="right_arrow "
+                onClick={() => scrollRight2()}
               >
                 <img className="right_arrow" src={right_arrow_icon}></img>
               </button>
@@ -262,9 +324,9 @@ const RestaurantCardList = () => {
           <div id="card_carousel" className="card_carousel">
             {topRestuarants.map((restuarant, index) => {
               return (
-                // <Link className="link" to={"/restuarant/" + restuarant.info.id}>
-                <RestaurantCard key={index} {...restuarant.info} />
-                // </Link>
+                <Link className="link" to={"/restuarant/" + restuarant.info.id}>
+                  <RestaurantCard key={index} {...restuarant.info} />
+                </Link>
               );
             })}
           </div>
@@ -276,7 +338,7 @@ const RestaurantCardList = () => {
       </div>
       <br></br>
       <div className="card_container">
-        <span className="sort">
+        <span className="sort" style={{ cursor: "initial" }}>
           Filter{" "}
           <img
             style={{ margin: "0px 5px", width: "13px" }}

@@ -36,9 +36,16 @@ const NavList = () => {
         <li className="list">Sign In</li>
       </div>
       <Link className="navlist" to="/cart">
-        <span className="itemLength">
-          <b>{cartItems.length}</b>
-        </span>
+        {cartItems.length === 0 ? (
+          <span
+            className="itemLength"
+            style={{ backgroundColor: "transparent" }}
+          ></span>
+        ) : (
+          <span className="itemLength">
+            <b>{cartItems.length}</b>
+          </span>
+        )}
         <img className=" cart_icon" alt="cart_icon" src={cart_icon}></img>
         <li className="list">Cart</li>
       </Link>

@@ -33,15 +33,21 @@ ul {
 }
 
 .logo_image {
-  width: 50px;
-  height: 50px;
+  width: 73px;
+  /* height: 50px; */
   margin-right: 10px;
 }
 
 span {
   /* font-family: "Wavefont", cursive; */
 }
-
+.logo > span {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  color: #7c7c7c;
+  font-family: Noto Sans Multani, sans-serif;
+}
 .navlist {
   text-decoration: none;
   color: black;
@@ -50,11 +56,14 @@ span {
   justify-content: center;
   margin: 10px 20px;
   cursor: pointer;
+  font-family: Noto Sans Multani, sans-serif;
 }
 
 .navlist > li {
   list-style-type: none;
-  font-family: "Kanit", sans-serif;
+  /* font-family: "Kanit", sans-serif; */
+  font-family: Noto Sans Multani, sans-serif;
+  font-size: 14px;
   letter-spacing: 0.3px;
   /* font-family: "Lato", sans-serif; */
   /* font-family: "Roboto", sans-serif; */
@@ -453,6 +462,9 @@ span {
   display: flex;
   justify-content: center;
   border-radius: 0px 0px 8px 8px;
+  text-align: center;
+  /* height: 18px; */
+  /* overflow: hidden; */
 }
 .menu_restuarant_rating_image {
   width: 15px;
@@ -563,6 +575,13 @@ span {
   width: 120px;
   height: 102px;
   border-radius: 12px;
+}
+.menu_alt_image {
+  object-fit: cover;
+  border-radius: 12px;
+  width: 70px;
+  height: 72px;
+  margin: 17px 25px;
 }
 .menu_add_to_cart {
   color: #60b246;
@@ -699,18 +718,49 @@ span {
   justify-content: center;
   margin-right: 20px; */
 }
+
 #slideLeft {
-  background: rgb(234, 234, 234);
+  cursor: pointer;
+  /* background: #eaeaea; */
+  border: none;
+  /* border-radius: 50px; */
+  justify-content: center;
+  align-items: center;
   width: 32px;
   height: 32px;
+  margin-right: 15px;
+  display: flex;
   border-radius: 50px;
+  background: #ffffff;
+  box-shadow: 5px 5px 58px #a1a1a1, -5px -5px 58px #ffffff;
+}
+.slideL {
+  cursor: pointer;
+  /* background: #eaeaea; */
+  border: none;
+  /* border-radius: 50px; */
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  margin-right: 15px;
+  display: flex;
+  border-radius: 50px;
+  background: #ffffff;
+  box-shadow: 5px 5px 58px #a1a1a1, -5px -5px 58px #ffffff;
+}
+.slideR {
+  /* background: rgb(234, 234, 234); */
+  width: 32px;
+  height: 32px;
+  /* border-radius: 50px; */
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 15px;
-
   cursor: pointer;
   border: none;
+  border-radius: 50px;
+  background: #ffffff;
 }
 /* #slideLeft :hover {
   background-color: rgb(211, 211, 211);
@@ -720,15 +770,18 @@ span {
   height: 21px;
 }
 #slideRight {
-  background: rgb(234, 234, 234);
+  /* background: rgb(234, 234, 234); */
   width: 32px;
   height: 32px;
-  border-radius: 50px;
+  /* border-radius: 50px; */
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   border: none;
+  border-radius: 50px;
+  background: #ffffff;
+  box-shadow: 5px 5px 58px #a1a1a1, -5px -5px 58px #ffffff;
 }
 /* #slideRight :hover {
   background: rgb(211, 211, 211);
@@ -1423,7 +1476,7 @@ span {
   justify-content: center;
   color: white;
   font-size: 10px;
-  border-radius: 6px;
+  border-radius: 7px;
   margin-right: -25px;
   margin-top: -15px;
   z-index: 6;
@@ -1530,6 +1583,7 @@ span {
   margin: 0px 5px;
   border-radius: 50px;
   box-shadow: rgba(2, 6, 12, 0.04) 0px 2px 12px;
+  /* box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff; */
   background-color: rgb(255, 255, 255);
   font-size: 13px;
   color: #636363;
@@ -1538,4 +1592,12 @@ span {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+/*  */
+.photo_container {
+  width: 100%;
+  height: 100vh;
+  background: antiquewhite;
+  position: fixed;
+  margin-top: -284px;
 }

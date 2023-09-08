@@ -72,6 +72,7 @@ const SearchRestuarant = () => {
   const [filteredRestuarants, setFilteredRestuarants] = useState([]);
   const [allRestuarants, setAllRestuarants] = useState([]);
   const [recentSearches, setRecentSearches] = useState([]);
+  const [topRestuarants, setTopRestuarants] = useState([]);
 
   // useEffect(() => {
   //   getrestuarants();
@@ -102,10 +103,15 @@ const SearchRestuarant = () => {
     // setFilteredRestuarants(
     //   json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     // );
+    setTopRestuarants(
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
     setAllRestuarants(
       json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   }
+
+  // setAllRestuarants((res) => [...res, topRestuarants]);
 
   console.log(popularCuisines);
   return allRestuarants?.length === 0 ? (

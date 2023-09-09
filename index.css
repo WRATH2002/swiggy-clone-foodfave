@@ -1320,7 +1320,7 @@ span {
   width: 278px;
   outline: none;
   border: none;
-  background-color: #e9e9eb;
+  background: #f9f9f9;
   height: 47px;
   margin-top: 20px;
 }
@@ -1597,9 +1597,14 @@ span {
 .photo_container {
   width: 100%;
   height: 100vh;
-  background: antiquewhite;
+  /* background: antiquewhite; */
+  background: rgba(0, 0, 0, 0.48);
   position: fixed;
   margin-top: -284px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 /* login */

@@ -97,12 +97,12 @@ const RestaurantCardShimmer = () => {
               <button
                 id="slideLeft"
                 className="slide"
-                style={{ backgroundColor: "#cecece" }}
+                style={{ backgroundColor: "#cecece", boxShadow: "none" }}
               ></button>
               <button
                 id="slideRight"
                 className="right_arrow"
-                style={{ backgroundColor: "#cecece" }}
+                style={{ backgroundColor: "#cecece", boxShadow: "none" }}
               ></button>
             </div>
           </div>
@@ -138,12 +138,12 @@ const RestaurantCardShimmer = () => {
               <button
                 id="slideLeft2"
                 className=" slideL"
-                style={{ backgroundColor: "#cecece" }}
+                style={{ backgroundColor: "#cecece", boxShadow: "none" }}
               ></button>
               <button
                 id="slideRight"
                 className="right_arrow "
-                style={{ backgroundColor: "#cecece" }}
+                style={{ backgroundColor: "#cecece", boxShadow: "none" }}
               ></button>
             </div>
           </div>

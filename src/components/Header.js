@@ -144,7 +144,7 @@ export const Header = () => {
                   <span className="switch_login">
                     or{" "}
                     <span
-                      style={{ color: " #fc8019" }}
+                      style={{ color: " #fc8019", cursor: "pointer" }}
                       onClick={() => togglein()}
                     >
                       create an account
@@ -178,7 +178,7 @@ export const Header = () => {
                   <span className="switch_login">
                     or{" "}
                     <span
-                      style={{ color: " #fc8019" }}
+                      style={{ color: " #fc8019", cursor: "pointer" }}
                       onClick={() => togglein()}
                     >
                       login to your account
@@ -187,21 +187,28 @@ export const Header = () => {
                   <spna className="underline_login"></spna>
                   <input
                     className="phonenumber_login"
-                    placeholder="Phone Number"
+                    placeholder="Name"
+                    type="name"
                   ></input>
                   <input
                     className="phonenumber_login"
-                    placeholder="Name"
+                    placeholder="Phone Number"
                     style={{ marginTop: "0px" }}
+                    type=""
                   ></input>
                   <input
                     className="phonenumber_login"
                     placeholder="Email"
                     style={{ marginTop: "0px" }}
+                    type="email"
                   ></input>
                   <span className="switch_login">
                     <span
-                      style={{ color: " #5d8ed5", marginTop: "10px" }}
+                      style={{
+                        color: " #5d8ed5",
+                        marginTop: "10px",
+                        cursor: "pointer",
+                      }}
                       onClick={() => togglein()}
                     >
                       Have a referral code ?

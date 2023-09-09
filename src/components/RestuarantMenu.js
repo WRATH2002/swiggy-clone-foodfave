@@ -32,6 +32,104 @@ import { useSelector } from "react-redux";
 import { addItemName, addIsVeg, addPrice, qty } from "../utils/cartSlice";
 import CartItemInfo from "./CartItemInfo";
 import { useSelector } from "react-redux";
+import cross_icon from "../assets/img/cross.png";
+
+const MenuImageViewer = (props) => {
+  return (
+    <>
+      <div className="photo_container">
+        <div
+          style={{
+            width: "460px",
+            height: "460px",
+            backgroundColor: "white",
+            borderRadius: "15px",
+            padding: "20px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+          }}
+        >
+          <div>
+            {props.data.imageId === undefined ? (
+              <img
+                className=""
+                src={no_photo_icon}
+                style={{ cursor: "pointer" }}
+                onClick={() => imageViewerToggler()}
+              ></img>
+            ) : (
+              <img
+                className=""
+                src={IMG_URL + props.data.imageId}
+                style={{
+                  cursor: "pointer",
+                  width: "460px",
+                  height: "350px",
+                  borderRadius: "15px",
+                }}
+                onClick={() => imageViewerToggler()}
+              ></img>
+            )}
+          </div>
+          <span>
+            {props.data.isVeg === 1 ? (
+              <img
+                style={{ width: "20px", marginTop: "10px", marginLeft: "-2px" }}
+                className=""
+                src={veg_icon}
+              ></img>
+            ) : (
+              <img
+                style={{ width: "20px", marginTop: "10px", marginLeft: "-2px" }}
+                className=""
+                src={non_veg_icon}
+              ></img>
+            )}
+          </span>
+          <span style={{ width: "100%", height: "25px" }}>
+            <b>{props.data.name}</b>
+          </span>
+          <span
+            style={{
+              width: "100%",
+              height: "25px",
+              marginTop: "3px",
+              fontSize: "15px",
+            }}
+          >
+            {props.data.price === undefined ? (
+              <span className="">
+                <span>&#x20b9;</span>
+                {props.data.defaultPrice / 100}
+              </span>
+            ) : (
+              <span className="">
+                <span>&#x20b9;</span>
+                {props.data.price / 100}
+              </span>
+            )}
+          </span>
+          <span
+            style={{
+              width: "100%",
+              height: "20px",
+              marginTop: "3px",
+              fontSize: "13px",
+              overflow: "hidden",
+              color: "#787878",
+            }}
+          >
+            {props.data.description}
+          </span>
+        </div>
+        <div>
+          <img src={cross_icon}></img>
+        </div>
+      </div>
+    </>
+  );
+};
 
 const MenuList = ({
   name,
@@ -59,10 +157,17 @@ const MenuList = ({
   const [qty, setQty] = useState(1);
 
   const [cartQty, setCartQty] = useState(1);
+  const [imgViewer, setImgViewer] = useState(false);
 
   function toggleBtn() {
     const flag = !toggleAddBtn;
     setToggleAddBtn(flag);
+  }
+
+  function imageViewerToggler() {
+    const flag = !imgViewer;
+    setImgViewer(flag);
+    console.log(imgViewer);
   }
 
   const handleAddItem = () => {
@@ -76,29 +181,129 @@ const MenuList = ({
   };
   return (
     <>
-      {/* <div className="photo_container">
-        <div style={{}}>
-          {isVeg === 1 ? (
-            <img className="is_veg_image" src={veg_icon}></img>
-          ) : (
-            <img className="is_veg_image" src={non_veg_icon}></img>
-          )}
-          <span>{isVeg}</span>
-          <span>{name}</span>
-          {price === undefined ? (
-            <p className="menu_price">
-              <span>&#x20b9;</span>
-              {defaultPrice / 100}
-            </p>
-          ) : (
-            <p className="menu_price">
-              <span>&#x20b9;</span>
-              {price / 100}
-            </p>
-          )}
-          <span>{description}</span>
+      {imgViewer === false ? (
+        <></>
+      ) : (
+        // <MenuImageViewer
+        //   data={{ imageId, name, isVeg, description, price, defaultPrice }}
+        // />
+        <div className="photo_container">
+          <div
+            style={{
+              width: "460px",
+              height: "460px",
+              backgroundColor: "white",
+              borderRadius: "15px",
+              padding: "20px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              {imageId === undefined ? (
+                <img
+                  className=""
+                  src={no_photo_icon}
+                  style={{ objectFit: "cover", width: "76%" }}
+                ></img>
+              ) : (
+                <img
+                  className=""
+                  src={IMG_URL + imageId}
+                  style={{
+                    width: "460px",
+                    height: "350px",
+                    borderRadius: "15px",
+                    objectFit: "cover",
+                  }}
+                ></img>
+              )}
+            </div>
+            <span>
+              {isVeg === 1 ? (
+                <img
+                  style={{
+                    width: "20px",
+                    marginTop: "10px",
+                    marginLeft: "-2px",
+                  }}
+                  className=""
+                  src={veg_icon}
+                ></img>
+              ) : (
+                <img
+                  style={{
+                    width: "20px",
+                    marginTop: "10px",
+                    marginLeft: "-2px",
+                  }}
+                  className=""
+                  src={non_veg_icon}
+                ></img>
+              )}
+            </span>
+            <span style={{ width: "100%", height: "25px" }}>
+              <b>{name}</b>
+            </span>
+            <span
+              style={{
+                width: "100%",
+                height: "25px",
+                marginTop: "3px",
+                fontSize: "15px",
+              }}
+            >
+              {price === undefined ? (
+                <span className="">
+                  <span>&#x20b9;</span>
+                  {defaultPrice / 100}
+                </span>
+              ) : (
+                <span className="">
+                  <span>&#x20b9;</span>
+                  {price / 100}
+                </span>
+              )}
+            </span>
+            <span
+              style={{
+                width: "100%",
+                height: "20px",
+                marginTop: "3px",
+                fontSize: "13px",
+                overflow: "hidden",
+                color: "#787878",
+              }}
+            >
+              {description}
+            </span>
+          </div>
+          <div
+            onClick={() => imageViewerToggler()}
+            style={{
+              width: "50px",
+              height: "50px",
+              borderRadius: "50px",
+              marginTop: "20px",
+              backgroundColor: "white",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+            }}
+          >
+            <img style={{ width: "30px" }} src={cross_icon}></img>
+          </div>
         </div>
-      </div> */}
+      )}
+
       <div className="menu_container">
         <div className="menu_info">
           <p>
@@ -132,9 +337,19 @@ const MenuList = ({
         </div>
         <div className="menu_add">
           {imageId === undefined ? (
-            <img className="menu_alt_image" src={no_photo_icon}></img>
+            <img
+              className="menu_alt_image"
+              src={no_photo_icon}
+              style={{ cursor: "pointer" }}
+              // onClick={() => imageViewerToggler()}
+            ></img>
           ) : (
-            <img className="menu_image" src={IMG_URL + imageId}></img>
+            <img
+              className="menu_image"
+              src={IMG_URL + imageId}
+              style={{ cursor: "pointer" }}
+              onClick={() => imageViewerToggler()}
+            ></img>
           )}
 
           {!toggleAddBtn ? (
@@ -287,7 +502,7 @@ const MenuInfo = ({
 
   async function getrestuarantInfo() {
     const data = await fetch(
-      "https://cors-anywhere.herokuapp.com/https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=22.4875917&lng=88.3711233&restaurantId=" +
+      "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=22.4875917&lng=88.3711233&restaurantId=" +
         id +
         "&catalog_qa=undefined&submitAction=ENTER"
     );
@@ -503,7 +718,7 @@ const RestaurantMenu = () => {
 
   async function getrestuarantInfo() {
     const data = await fetch(
-      "https://cors-anywhere.herokuapp.com/https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=22.4875917&lng=88.3711233&restaurantId=" +
+      "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=22.4875917&lng=88.3711233&restaurantId=" +
         id +
         "&catalog_qa=undefined&submitAction=ENTER"
     );

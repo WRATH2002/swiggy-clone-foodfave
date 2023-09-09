@@ -179,6 +179,26 @@ const MenuList = ({
     dispatch(removeItem({ id }));
     // console.log(itemId);
   };
+
+  function checkPrevMenu(id) {
+    const itemidchecker = cartItemInfo;
+    const temp = itemidchecker.filter((item) => item.id === id);
+    console.log(temp);
+    return temp;
+  }
+
+  function showAlert() {
+    var x = document.getElementById("alreadyitemalerttext");
+
+    // Add the "show" class to DIV
+    x.className = "show";
+
+    // After 3 seconds, remove the show class from DIV
+    setTimeout(function () {
+      x.className = x.className.replace("show", "");
+    }, 1500);
+  }
+
   return (
     <>
       {imgViewer === false ? (
@@ -304,6 +324,10 @@ const MenuList = ({
         </div>
       )}
 
+      <div id="alreadyitemalert">
+        <span id="alreadyitemalerttext">The Item is already in the Cart</span>
+      </div>
+
       <div className="menu_container">
         <div className="menu_info">
           <p>
@@ -360,24 +384,68 @@ const MenuList = ({
                 if (price === undefined) {
                   price = defaultPrice;
                 }
-                if (flag[0] === 1) {
-                  dispatch(decFlag());
+                const tempp = checkPrevMenu(id);
+                if (tempp.length === 0) {
+                  if (flag[0] === 1) {
+                    dispatch(decFlag());
+                  } else {
+                    var quantity = qty;
+                    quantity += 1;
+                    setQty(qty);
+                    handleAddItem();
+                    totalAmount();
+                    toggleBtn();
+                    console.log(qty);
+                    console.log(cartItemInfo);
+                    dispatch(uniqueItem());
+                  }
                 } else {
-                  var quantity = qty;
-                  quantity += 1;
-                  setQty(qty);
-                  handleAddItem();
-                  totalAmount();
-                  toggleBtn();
-                  console.log(qty);
-                  console.log(cartItemInfo);
-                  dispatch(uniqueItem());
+                  showAlert();
                 }
               }}
             >
               <b>ADD</b>
             </div>
           ) : (
+            // ) : checkPrevMenu(id) === 1 ? (
+            //   <div id="add_qty" className="cart_add_button">
+            //     <div
+            //       className="btn decrease_qty"
+            //       onClick={() => {
+            //         console.log("clicked");
+            //         var quantity = cartItemInfo.qty;
+            //         if (quantity - 1 === 0) {
+            //           handleRemoveItem();
+            //           dispatch(totalAmount());
+            //           toggleBtn();
+            //         } else {
+            //           quantity = quantity - 1;
+            //           setCartQty(quantity);
+            //           console.log(cartQty);
+            //           dispatch(decQty(id));
+            //           dispatch(totalAmount());
+            //         }
+            //       }}
+            //     >
+            //       <div className="decrease"></div>
+            //     </div>
+            //     <button className="qty">{cartItemInfo.qty}</button>
+            //     <button
+            //       className="btn increase_qty"
+            //       onClick={() => {
+            //         console.log("clicked");
+            //         var quantity = cartItemInfo.qty;
+            //         quantity = quantity + 1;
+            //         setCartQty(quantity);
+            //         console.log(cartQty);
+            //         dispatch(incQty(id));
+            //         dispatch(totalAmount());
+            //       }}
+            //     >
+            //       +
+            //     </button>
+            //   </div>
+            // ) :
             <div id="add_qty" className="cart_add_button">
               <div
                 className="btn decrease_qty"

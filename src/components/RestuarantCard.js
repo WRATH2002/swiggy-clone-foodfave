@@ -101,22 +101,19 @@ function scrollLeft1() {
   document.getElementById("img_carousel").scrollLeft -= 820;
 }
 function scrollRight1() {
-  document.getElementById("img_carousel").scrollLeft += 816;
+  document.getElementById("img_carousel").scrollLeft += 820;
 }
 function scrollLeft2() {
-  document.getElementById("card_carousel").scrollLeft -= 820;
+  document.getElementById("card_carousel").scrollLeft -= 920;
 }
 function scrollRight2() {
-  document.getElementById("card_carousel").scrollLeft += 816;
+  document.getElementById("card_carousel").scrollLeft += 835;
 }
 
 const ImgCarousel = ({ imageId }) => {
   return (
     <>
-      <img
-        style={{ margin: "9px 17px", width: "420px" }}
-        src={IMG_URL + imageId}
-      ></img>
+      <img style={{ width: "420px" }} src={IMG_URL + imageId}></img>
     </>
   );
 };
@@ -140,7 +137,7 @@ const RestaurantCardList = () => {
 
   async function getrestuarants() {
     const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.4875917&lng=88.3711233&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      "https://cors-anywhere.herokuapp.com/https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.4875917&lng=88.3711233&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
     console.log(json);
@@ -290,6 +287,7 @@ const RestaurantCardList = () => {
               return (
                 <Link
                   className="link"
+                  style={{ margin: "9px 17px" }}
                   to={"/restuarant/" + restuarant.entityId}
                 >
                   <ImgCarousel key={index} {...restuarant} />
@@ -324,7 +322,11 @@ const RestaurantCardList = () => {
           <div id="card_carousel" className="card_carousel">
             {topRestuarants.map((restuarant, index) => {
               return (
-                <Link className="link" to={"/restuarant/" + restuarant.info.id}>
+                <Link
+                  className="link"
+                  style={{ margin: "9px 17px" }}
+                  to={"/restuarant/" + restuarant.info.id}
+                >
                   <RestaurantCard key={index} {...restuarant.info} />
                 </Link>
               );
@@ -378,6 +380,7 @@ const RestaurantCardList = () => {
                 return (
                   <Link
                     className="link"
+                    style={{ margin: "9px 17px" }}
                     to={"/restuarant/" + restuarant.info.id}
                   >
                     <RestaurantCard key={index} {...restuarant.info} />

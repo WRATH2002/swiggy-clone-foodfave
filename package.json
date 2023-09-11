@@ -2,6 +2,7 @@
   "name": "react-swiggy",
   "version": "1.0.0",
   "description": "React Project Swiggy Clone",
+  "proxy": "https://www.swiggy.com/",
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html",
@@ -20,9 +21,11 @@
     "process": "^0.11.10"
   },
   "dependencies": {
+    "@react-icons/all-files": "^4.1.0",
     "@reduxjs/toolkit": "^1.9.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.11.0",
     "react-loading-skeleton": "^3.3.1",
     "react-redux": "^8.1.2",
     "react-router-dom": "^6.15.0"

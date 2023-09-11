@@ -122,7 +122,7 @@ span {
 .card_carousel {
   align-items: center;
   width: 83%;
-  margin: 0 4%;
+  /* margin: 0 4%; */
   display: flex;
   overflow-x: scroll;
 }
@@ -165,13 +165,43 @@ span {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 238px;
+  width: 244px;
   height: 265px;
-  margin: 9px 17px;
+  /* margin: 9px 17px; */
   font-family: Nunito Sans, sans-serif;
   display: flex;
 }
-
+.vegslider {
+  align-items: center;
+  font-family: Nunito Sans, sans-serif;
+  display: flex;
+  width: 770px;
+  justify-content: flex-start;
+}
+.bgwhite {
+  background-color: #d4d5d9;
+  transition: 0.4s;
+}
+.bggreen {
+  background-color: #60b246;
+  transition: 0.4s;
+}
+.vegHide {
+  width: 16px;
+  height: 16px;
+  background: white;
+  border-radius: 3px;
+  margin-left: 3px;
+  transition: 0.4s;
+}
+.vegShow {
+  background: #fff;
+  border-radius: 3px;
+  width: 16px;
+  height: 16px;
+  margin-left: 22.5px;
+  transition: 0.4s;
+}
 /* .card:hover {
   height: 280px;
   width: 202px;
@@ -805,6 +835,7 @@ span {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding: 0px 4%;
 }
 
 /* MenuList Shimmer */
@@ -1544,7 +1575,7 @@ span {
   display: flex;
   flex-direction: column;
   text-align: justify;
-  box-shadow: 0 4px 14px #d4d5d9;
+  /* box-shadow: 0 4px 14px #d4d5d9; */
   margin-bottom: 30px;
 }
 .alertbtn > button {
@@ -1567,11 +1598,14 @@ span {
 }
 .alert_container {
   width: 100%;
-  height: calc(100vh - 80px);
+  /* height: calc(100vh - 80px); */
   position: fixed;
-  margin-top: -60px;
+  /* margin-top: -60px; */
+  height: 100vh;
+  margin-top: -140px;
   display: flex;
   justify-content: center;
+  background: rgba(0, 0, 0, 0.48);
   align-items: flex-end;
   /* margin-bottom: 20px; */
   /* bottom: 0px; */

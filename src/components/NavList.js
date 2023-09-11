@@ -14,6 +14,7 @@ const NavList = () => {
       {/* <div className="navlist"> */}
       <Link className="navlist" to="/search">
         <img className=" search_icon" alt="search_icon" src={search_icon}></img>
+
         <li className="list">Search</li>
       </Link>
       {/* </div> */}

@@ -570,7 +570,7 @@ const MenuInfo = ({
 
   async function getrestuarantInfo() {
     const data = await fetch(
-      "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=22.4875917&lng=88.3711233&restaurantId=" +
+      "https://cors-anywhere.herokuapp.com/https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=22.4875917&lng=88.3711233&restaurantId=" +
         id +
         "&catalog_qa=undefined&submitAction=ENTER"
     );
@@ -764,6 +764,7 @@ function toggleImage() {
 const RestaurantMenu = () => {
   const [restuarantInfo, setRestuarantInfo] = useState([]);
   const [restuarantMenu, setRestuarantMenu] = useState([]);
+  const [restuarantMenuTemp, setRestuarantMenuTemp] = useState([]);
   const [altRestuarantMenu, setAltRestuarantMenu] = useState([]);
   const [menuCuisine, setMenuCuisine] = useState([]);
   const [menuTitle, setMenuTitle] = useState([]);
@@ -786,13 +787,17 @@ const RestaurantMenu = () => {
 
   async function getrestuarantInfo() {
     const data = await fetch(
-      "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=22.4875917&lng=88.3711233&restaurantId=" +
+      "https://cors-anywhere.herokuapp.com/https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=22.4875917&lng=88.3711233&restaurantId=" +
         id +
         "&catalog_qa=undefined&submitAction=ENTER"
     );
     const json = await data.json();
     console.log(json);
     setRestuarantMenu(
+      json?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card
+        ?.card?.itemCards
+    );
+    setRestuarantMenuTemp(
       json?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card
         ?.card?.itemCards
     );
@@ -815,6 +820,8 @@ const RestaurantMenu = () => {
     //   );
     // }
   }
+
+  const [vegS, setVegS] = useState(true);
   // console.log("info : " + { restuarantInfo });
   // const restuarantName = restuarantInfo.info.name;
   // const restuarantAreaName = restuarantInfo.info.areaName;
@@ -825,6 +832,27 @@ const RestaurantMenu = () => {
   // console.log(restuarantInfo.info.cloudinaryImageId);
 
   // console.log(menuTitle);
+  function showVeg() {
+    var x = document.getElementById("showvegbtn");
+    var y = document.getElementById("bgcolor");
+    setVegS(!vegS);
+    console.log(vegS);
+    if (vegS === true) {
+      const temp = restuarantMenuTemp;
+      const update = temp.filter((tem) => tem.card.info.isVeg === 1);
+      setRestuarantMenu(update);
+      x.className = "vegShow";
+      y.className = "bggreen";
+    } else {
+      x.className = "vegHide";
+      y.className = "bgwhite";
+      setRestuarantMenu(restuarantMenuTempnpm);
+    }
+
+    // setTimeout(function () {
+    //   x.className = x.className.replace("show", "");
+    // }, 1500);
+  }
 
   return restuarantMenu?.length === 0 ? (
     <RestuarantMenuShimmer />
@@ -845,6 +873,51 @@ const RestaurantMenu = () => {
       </div>
       <MenuInfo {...restuarantInfo.info} />
 
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: "40px",
+          marginBottom: "20px",
+        }}
+      >
+        <div className="vegslider">
+          <span style={{}}>
+            <b>Veg Only</b>
+          </span>
+          <div
+            id="bgcolor"
+            className="bgwhite"
+            style={{
+              width: "41px",
+              height: "22px",
+              borderRadius: "3px",
+              marginLeft: "15px",
+              display: "flex",
+              alignItems: "center",
+              cursor: "pointer",
+            }}
+            onClick={() => showVeg()}
+          >
+            <div
+              id="showvegbtn"
+              className="vegHide"
+              // style={{
+              //   width: "20px",
+              //   height: "20px",
+              //   background: "white",
+              //   borderRadius: "5px",
+              //   marginLeft: "3px",
+              // }}
+            ></div>
+          </div>
+        </div>
+      </div>
+      <div className="line_holder">
+        <div className="hr_line"></div>
+      </div>
       <div className="recomended_menu">
         {/* <span>Recomended</span> */}
         <div className="menulist_container">
@@ -863,6 +936,7 @@ const RestaurantMenu = () => {
           })}
           )} */}
           {/* altRestuarantMenu */}
+
           {restuarantMenu === undefined ? (
             altRestuarantMenu === undefined ? (
               <div

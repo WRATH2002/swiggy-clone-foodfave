@@ -10,6 +10,6 @@ It is a clone website of swiggy.com. Technologies used in my project are -
 
 I've built this complete website using React JS, Redux - Toolkit, JavaScript, HTML & CSS.
 
-You can checkout my project here - https://foodfaves.netlify.app/
+You can checkout my project here - https://foodfave.netlify.app/
 
 Note - Please check it on PC only and use the CORS extension to see live.

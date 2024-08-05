@@ -1,3 +1,5 @@
+NOTE : This website currently not working due to change in API format of Swiggy Website.
+
 It is a clone website of swiggy.com. Technologies used in my project are -
 
 • Data fetching from the Swiggy website
